@@ -1,22 +1,14 @@
-from miniGan.logger import Logger
-
-from miniGan.utils import noise, images_to_vectors, vectors_to_images
-
-from miniGan.models import GeneratorNet, DiscriminatorNet
-
-from miniGan.trainers import train_discriminator, train_generator
-
-from miniGan.optimizers import discriminator_optimizer, generator_optimizer
-
-from miniGan.losses import loss
-
 from torchvision import transforms
-
 from torchvision import datasets
-
 from torch.autograd import Variable
-
 import torch
+
+from miniGan.logger import Logger
+from miniGan.utils import noise, images_to_vectors, vectors_to_images
+from miniGan.models import GeneratorNet, DiscriminatorNet
+from miniGan.trainers import train_discriminator, train_generator
+from miniGan.optimizers import discriminator_optimizer, generator_optimizer
+from miniGan.losses import loss
 
 
 def mnist_data():
