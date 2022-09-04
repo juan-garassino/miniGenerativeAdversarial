@@ -6,9 +6,15 @@ from miniGan.models import GeneratorNet, DiscriminatorNet
 
 from miniGan.trainers import train_discriminator, train_generator
 
-from miniGan.optimizers import d_optimizer, g_optimizer
+from miniGan.optimizers import discriminator_optimizer, generator_optimizer
+
+from miniGan.losses import loss
 
 from torchvision import transforms
+
+from torchvision import datasets
+
+from torch.autograd import Variable
 
 import torch
 
@@ -51,14 +57,20 @@ for epoch in range(num_epochs):
         fake_data = generator(noise(N)).detach()
         # Train D
         d_error, d_pred_real, d_pred_fake = train_discriminator(
-            d_optimizer, real_data, fake_data
+            discriminator,
+            loss,
+            discriminator_optimizer(discriminator)[1],
+            real_data,
+            fake_data,
         )
 
         # 2. Train Generator
         # Generate fake data
         fake_data = generator(noise(N))
         # Train G
-        g_error = train_generator(g_optimizer, fake_data)
+        g_error = train_generator(
+            discriminator, loss, generator_optimizer(generator)[1], fake_data
+        )
         # Log batch error
         logger.log(d_error, g_error, epoch, n_batch, num_batches)
         # Display Progress every few batches

@@ -1,5 +1,7 @@
 import torch
 
+from torch.autograd import Variable
+
 
 def noise(size):
     """
