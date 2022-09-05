@@ -8,6 +8,8 @@ from IPython import display
 from matplotlib import pyplot as plt
 import torch
 
+from colorama import Fore, Style
+
 
 """
     TensorBoard Data will be stored in './runs' path
@@ -74,7 +76,7 @@ class Logger:
     def save_torch_images(
         self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
     ):
-        out_dir = "./results/images/{}".format(self.data_subdir)
+        out_dir = "./results/torch/{}".format(self.data_subdir)
         Logger._make_dir(out_dir)
 
         # Plot and save horizontal
@@ -122,21 +124,13 @@ class Logger:
         if isinstance(d_pred_fake, torch.autograd.Variable):
             d_pred_fake = d_pred_fake.data
 
-        print(
-            "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
-                epoch, num_epochs, n_batch, num_batches
-            )
-        )
-        print(
-            "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
-                d_error, g_error
-            )
-        )
-        print(
-            "D(x): {:.4f}, D(G(z)): {:.4f}".format(
-                d_pred_real.mean(), d_pred_fake.mean()
-            )
-        )
+        print(Fore.GREEN + "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
+            epoch, num_epochs, n_batch, num_batches) + Style.RESET_ALL)
+        print(Fore.BLUE +
+              "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
+                  d_error, g_error) + Style.RESET_ALL)
+        print(Fore.YELLOW + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
+            d_pred_real.mean(), d_pred_fake.mean()) + Style.RESET_ALL)
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)

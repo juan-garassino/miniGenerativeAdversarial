@@ -15,7 +15,7 @@ def mnist_data():
     compose = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
     )  # ((.5, .5, .5), (.5, .5, .5))
-    out_dir = "./data"
+    out_dir = "./miniGan/data"
     return datasets.MNIST(root=out_dir, train=True, transform=compose, download=True)
 
 
@@ -35,7 +35,7 @@ discriminator = DiscriminatorNet()
 generator = GeneratorNet()
 
 # Create logger instance
-logger = Logger(model_name="VGAN", data_name="MNIST")
+logger = Logger(model_name="vgan", data_name="mnist")
 # Total number of epochs to train
 num_epochs = 50
 

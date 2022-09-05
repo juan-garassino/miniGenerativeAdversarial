@@ -24,10 +24,9 @@ clean:
 	@rm -fr build dist
 	@rm -fr miniGan-*.dist-info
 	@rm -fr miniGan.egg-info
-	@rm -fr miniGan/dataset
-	@rm -fr miniGan/runs
 	@rm -fr miniGan/data/*
-	@rm -fr data
+	@rm -fr runs
+	@rm -fr results
 
 install:
 	@pip install . -U
