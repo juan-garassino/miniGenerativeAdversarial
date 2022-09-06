@@ -9,15 +9,7 @@ from miniGan.models import GeneratorNet, DiscriminatorNet
 from miniGan.trainers import train_discriminator, train_generator
 from miniGan.optimizers import discriminator_optimizer, generator_optimizer
 from miniGan.losses import loss
-
-
-def mnist_data():
-    compose = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
-    )  # ((.5, .5, .5), (.5, .5, .5))
-    out_dir = "./miniGan/data"
-    return datasets.MNIST(root=out_dir, train=True, transform=compose, download=True)
-
+from miniGan.data import mnist_data
 
 # Load data
 data = mnist_data()
@@ -44,8 +36,7 @@ for epoch in range(num_epochs):
         N = real_batch.size(0)
         # 1. Train Discriminator
         real_data = Variable(images_to_vectors(real_batch))
-        # Generate fake data and detach
-        # (so gradients are not calculated for generator)
+        # Generate fake data and detach (so gradients are not calculated for generator)
         fake_data = generator(noise(N)).detach()
         # Train D
         d_error, d_pred_real, d_pred_fake = train_discriminator(
@@ -83,3 +74,5 @@ for epoch in range(num_epochs):
                 d_pred_real,
                 d_pred_fake,
             )
+
+            logger.save_models(generator, discriminator, epoch)
