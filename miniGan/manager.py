@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import errno
-from miniGan.predict import predict
 import torchvision.utils as vutils
 
 from tensorboardX import SummaryWriter
