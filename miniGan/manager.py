@@ -180,15 +180,15 @@ class Manager:  # make manager work with and with out epochs
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
         Manager.make_directory(out_dir)
-        torch.save(generator.state_dict(), "{}/generator-{}".format(out_dir, (epoch + 1)))
+        torch.save(generator.state_dict(), "{}/checkpoint-generator@{}".format(out_dir, (epoch + 1)))
         torch.save(
-            discriminator.state_dict(), "{}/critic-{}".format(out_dir, (epoch + 1))
+            discriminator.state_dict(), "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1))
         )
 
         print(
             "\n✅"
             + Fore.YELLOW
-            + "Saved model for epoch {}".format(epoch)
+            + "Saved model for epoch {}".format((epoch + 1))
             + Style.RESET_ALL
         )
 
