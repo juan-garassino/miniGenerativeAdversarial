@@ -60,7 +60,13 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig("image[{}].png".format(now))
 
     def save_torch_images(
-        self, horizontal_grid, grid, epoch=None, n_batch=None, plot_horizontal=True, predict=False,
+        self,
+        horizontal_grid,
+        grid,
+        epoch=None,
+        n_batch=None,
+        plot_horizontal=True,
+        predict=False,
     ):
 
         if predict:
@@ -68,7 +74,6 @@ class Manager:  # make manager work with and with out epochs
 
         if not predict:
             out_dir = "./results/images/{}".format(self.data_subdir)
-
 
         Manager.make_directory(out_dir)
 
@@ -100,7 +105,7 @@ class Manager:  # make manager work with and with out epochs
         num_batches=None,
         format="NCHW",
         normalize=True,
-        predict=False
+        predict=False,
     ):
         """
         input images are expected in format (NCHW)
@@ -124,11 +129,7 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_image(img_name, horizontal_grid, step)
 
         # Save plots
-        self.save_torch_images(horizontal_grid,
-                               grid,
-                               epoch,
-                               n_batch,
-                               predict=predict)
+        self.save_torch_images(horizontal_grid, grid, epoch, n_batch, predict=predict)
 
     def display_status(
         self,
@@ -180,9 +181,13 @@ class Manager:  # make manager work with and with out epochs
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
         Manager.make_directory(out_dir)
-        torch.save(generator.state_dict(), "{}/checkpoint-generator@{}".format(out_dir, (epoch + 1)))
         torch.save(
-            discriminator.state_dict(), "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1))
+            generator.state_dict(),
+            "{}/checkpoint-generator@{}".format(out_dir, (epoch + 1)),
+        )
+        torch.save(
+            discriminator.state_dict(),
+            "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1)),
         )
 
         print(
