@@ -27,6 +27,8 @@ clean:
 	@rm -fr miniGan/data/*
 	@rm -fr runs
 	@rm -fr results
+	@rm -fr notebooks/runs
+	@rm -fr notebooks/results
 
 install:
 	@pip install . -U
