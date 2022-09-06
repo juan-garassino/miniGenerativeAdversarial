@@ -95,9 +95,9 @@ class Manager:  # make manager work with and with out epochs
         self,
         images,
         num_images,
-        epoch,
-        n_batch,
-        num_batches,
+        epoch=None,
+        n_batch=None,
+        num_batches=None,
         format="NCHW",
         normalize=True,
         predict=False
@@ -128,7 +128,7 @@ class Manager:  # make manager work with and with out epochs
                                grid,
                                epoch,
                                n_batch,
-                               predict=False)
+                               predict=predict)
 
     def display_status(
         self,
