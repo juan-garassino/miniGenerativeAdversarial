@@ -1,7 +1,7 @@
 from torch.autograd import Variable
 import torch
 
-from miniGan.logger import Logger
+from miniGan.manager import Manager
 from miniGan.utils import noise, images_to_vectors, vectors_to_images
 from miniGan.models import GeneratorNet, DiscriminatorNet
 from miniGan.trainers import train_discriminator, train_generator
@@ -32,8 +32,8 @@ def main(
 
     generator = GeneratorNet()
 
-    # Create logger instance
-    logger = Logger(model_name=model_name, data_name=data_name)
+    # Create manager instance
+    manager = Manager(model_name=model_name, data_name=data_name)
     # Total number of epochs to train
 
     for epoch in range(num_epochs):
@@ -60,7 +60,7 @@ def main(
                 discriminator, loss, generator_optimizer(generator)[1], fake_data
             )
             # Log batch error
-            logger.log(d_error, g_error, epoch, n_batch, num_batches)
+            manager.log(d_error, g_error, epoch, n_batch, num_batches)
             # Display Progress every few batches
             if (n_batch) % 100 == 0:
 
@@ -68,11 +68,11 @@ def main(
                 test_images = test_images.data
 
                 # saves images
-                logger.log_images(
+                manager.log_images(
                     test_images, num_test_samples, epoch, n_batch, num_batches
                 )
                 # Display status Logs
-                logger.display_status(
+                manager.display_status(
                     epoch,
                     num_epochs,
                     n_batch,
@@ -84,7 +84,7 @@ def main(
                 )
 
         if (epoch + 1) % save_step == 0:
-            logger.save_models(generator, discriminator, epoch)
+            manager.save_models(generator, discriminator, epoch)
 
 
 if __name__ == "__main__":

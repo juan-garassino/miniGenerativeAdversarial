@@ -16,7 +16,7 @@ from colorama import Fore, Style
 """
 
 
-class Logger:
+class Manager:
     def __init__(self, model_name, data_name):
         self.model_name = model_name
         self.data_name = data_name
@@ -35,7 +35,7 @@ class Logger:
         if isinstance(g_error, torch.autograd.Variable):
             g_error = g_error.data.cpu().numpy()
 
-        step = Logger._step(epoch, n_batch, num_batches)
+        step = Manager._step(epoch, n_batch, num_batches)
         self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
         self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
 
@@ -58,7 +58,7 @@ class Logger:
         if format == "NHWC":
             images = images.transpose(1, 3)
 
-        step = Logger._step(epoch, n_batch, num_batches)
+        step = Manager._step(epoch, n_batch, num_batches)
         img_name = "{}/images{}".format(self.comment, "")
 
         # Make horizontal grid from image tensor
@@ -77,7 +77,7 @@ class Logger:
         self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
     ):
         out_dir = "./results/images/{}".format(self.data_subdir)
-        Logger._make_dir(out_dir)
+        Manager._make_dir(out_dir)
 
         # Plot and save horizontal
         fig = plt.figure(figsize=(16, 16))
@@ -97,7 +97,7 @@ class Logger:
 
     def _save_images(self, fig, epoch, n_batch, comment=""):
         out_dir = "./results/images/{}".format(self.data_subdir)
-        Logger._make_dir(out_dir)
+        Manager._make_dir(out_dir)
         fig.savefig(
             "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
         )
@@ -151,9 +151,9 @@ class Logger:
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
-        Logger._make_dir(out_dir)
-        torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, epoch))
-        torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, epoch))
+        Manager._make_dir(out_dir)
+        torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, (epoch + 1)))
+        torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, (epoch + 1)))
 
         print(
             "\n✅"

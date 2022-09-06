@@ -1,7 +1,7 @@
-from miniGan.logger import Logger
+from miniGan.manager import Manager
 from miniGan.utils import vectors_to_images, noise
 from miniGan.models import GeneratorNet
-from miniGan.logger import Logger
+from miniGan.manager import Manager
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,10 +9,10 @@ import torchvision.utils as vutils
 
 
 def predict(status, last=True, plot=False):
-    logger = Logger(model_name="vgan", data_name="mnist")
+    manager = Manager(model_name="vgan", data_name="mnist")
 
     generator = GeneratorNet()
-    generator.load_state_dict(logger.load_models(status), strict=True)
+    generator.load_state_dict(manager.load_models(status), strict=True)
 
     num_images = 16
     test_noise = noise(num_images)
@@ -20,7 +20,7 @@ def predict(status, last=True, plot=False):
 
     if plot:
 
-        logger.log_images(predicted_images.detach().numpy(), 16, 1, 1, 1)
+        manager.log_images(predicted_images.detach().numpy(), 16, 1, 1, 1)
 
         nrows = int(np.sqrt(num_images))
 
