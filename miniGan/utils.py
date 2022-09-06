@@ -32,3 +32,7 @@ def zeros_target(size):
     """
     data = Variable(torch.zeros(size, 1))
     return data
+
+
+if __name__ == "__main__":
+    pass

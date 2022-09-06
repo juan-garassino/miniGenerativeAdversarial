@@ -27,7 +27,7 @@ generator = GeneratorNet()
 # Create logger instance
 logger = Logger(model_name="vgan", data_name="mnist")
 # Total number of epochs to train
-num_epochs = 50
+num_epochs = 5
 
 for epoch in range(num_epochs):
     for n_batch, (real_batch, _) in enumerate(data_loader):
@@ -73,5 +73,5 @@ for epoch in range(num_epochs):
                 d_pred_fake,
             )
 
-    if epoch + 1 % 20 == 0:
+    if epoch + 1 % 1 == 0:
         logger.save_models(generator, discriminator, epoch)

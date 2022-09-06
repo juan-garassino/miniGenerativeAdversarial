@@ -57,5 +57,9 @@ pypi_test:
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
 
+
 run_model:
 	python -m miniGan.main
+
+predict:
+	python -m miniGan.predict

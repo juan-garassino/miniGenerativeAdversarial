@@ -158,12 +158,28 @@ class Logger:
         print(
             "\n✅"
             + Fore.YELLOW
-            + "Saved a model for epoch {}".format(epoch)
+            + "Saved model for epoch {}".format(epoch)
             + Style.RESET_ALL
         )
 
-    def close(self):
+    def load_models(self, *args, last=True):
+        parent = os.path.join(os.path.dirname(__file__), "..")
+        input_dir = f"{parent}/results/models/{self.data_subdir}/{args[0]}"
+        generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
+
+        print(
+            "\n✅"
+            + Fore.YELLOW
+            + "Loaded model from {}...".format(input_dir[:59])
+            + Style.RESET_ALL
+        )
+
+        return generator
+
+    def close(self, generator, discriminator):
         self.writer.close()
+        torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, epoch))
+        torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, epoch))
 
     # Private Functionality
 
@@ -178,3 +194,7 @@ class Logger:
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
+
+
+if __name__ == "__main__":
+    pass
