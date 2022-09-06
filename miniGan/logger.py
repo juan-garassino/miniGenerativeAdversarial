@@ -76,7 +76,7 @@ class Logger:
     def save_torch_images(
         self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
     ):
-        out_dir = "./results/torch/{}".format(self.data_subdir)
+        out_dir = "./results/images/{}".format(self.data_subdir)
         Logger._make_dir(out_dir)
 
         # Plot and save horizontal
