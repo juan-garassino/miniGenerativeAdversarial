@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 import torch
 
 from colorama import Fore, Style
+import datetime
 
 
 """
@@ -39,34 +40,49 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
         self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
 
-    def _save_images(self, fig, epoch, n_batch, comment=""):
-        out_dir = "./results/images/{}".format(self.data_subdir)
-        Manager.make_directory(out_dir)
-        fig.savefig(
-            "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
-        )
+    def make_snapshot(
+        self, fig, epoch=None, n_batch=None, comment=""
+    ):  # here option to save without epoch!!!
+
+        if epoch and n_batch:
+            out_dir = "./results/images/{}".format(self.data_subdir)
+            Manager.make_directory(out_dir)
+            fig.savefig(
+                "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
+            )
+
+        if not epoch and n_batch:
+            out_dir = "./results/images/{}".format(self.data_subdir)
+            Manager.make_directory(out_dir)
+
+            now = datetime.now().strftime("%d-%m-%Y-%H-%M")
+
+            fig.savefig("image[{}].png".format(now))
 
     def save_torch_images(
-        self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
+        self, horizontal_grid, grid, epoch=None, n_batch=None, plot_horizontal=True
     ):
         out_dir = "./results/images/{}".format(self.data_subdir)
         Manager.make_directory(out_dir)
 
         # Plot and save horizontal
-        fig = plt.figure(figsize=(16, 16))
+        fig = plt.figure(figsize=(25, 25))
         plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
         plt.axis("off")
+
         if plot_horizontal:
             display.display(plt.gcf())
-        self._save_images(fig, epoch, n_batch, "hori")
-        plt.close()
+            self.make_snapshot(fig, epoch, n_batch, "hori")
+            plt.close()
 
         # Save squared
-        fig = plt.figure()
+        fig = plt.figure(figsize=(25, 25))
         plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
         plt.axis("off")
-        self._save_images(fig, epoch, n_batch)
-        plt.close()
+
+        if not plot_horizontal:
+            self.make_snapshot(fig, epoch, n_batch)
+            plt.close()
 
     def log_images(
         self,
