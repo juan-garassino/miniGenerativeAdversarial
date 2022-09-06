@@ -73,5 +73,5 @@ for epoch in range(num_epochs):
                 d_pred_fake,
             )
 
-    if epoch % 20 == 0:
+    if epoch + 1 % 20 == 0:
         logger.save_models(generator, discriminator, epoch)
