@@ -63,8 +63,11 @@ def main(
             logger.log(d_error, g_error, epoch, n_batch, num_batches)
             # Display Progress every few batches
             if (n_batch) % 100 == 0:
+
                 test_images = vectors_to_images(generator(test_noise))
                 test_images = test_images.data
+
+                # saves images
                 logger.log_images(
                     test_images, num_test_samples, epoch, n_batch, num_batches
                 )
@@ -80,7 +83,7 @@ def main(
                     d_pred_fake,
                 )
 
-        if epoch + 1 % save_step == 0:
+        if (epoch + 1) % save_step == 0:
             logger.save_models(generator, discriminator, epoch)
 
 
@@ -91,5 +94,5 @@ if __name__ == "__main__":
         batch_size=128,
         model_name="vgan",
         data_name="mnist",
-        save_step=1,
+        save_step=25,
     )
