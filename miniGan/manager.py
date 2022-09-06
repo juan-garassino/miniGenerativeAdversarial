@@ -72,7 +72,7 @@ class Manager:  # make manager work with and with out epochs
 
         if plot_horizontal:
             display.display(plt.gcf())
-            self.make_snapshot(fig, epoch, n_batch, "hori")
+            self.make_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
 
         # Save squared
@@ -81,7 +81,7 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if not plot_horizontal:
-            self.make_snapshot(fig, epoch, n_batch)
+            self.make_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
     def log_images(
@@ -168,9 +168,9 @@ class Manager:  # make manager work with and with out epochs
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
         Manager.make_directory(out_dir)
-        torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, (epoch + 1)))
+        torch.save(generator.state_dict(), "{}/generator-{}".format(out_dir, (epoch + 1)))
         torch.save(
-            discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, (epoch + 1))
+            discriminator.state_dict(), "{}/critic-{}".format(out_dir, (epoch + 1))
         )
 
         print(

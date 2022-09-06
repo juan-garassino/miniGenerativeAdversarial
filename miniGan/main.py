@@ -94,5 +94,5 @@ if __name__ == "__main__":
         batch_size=128,
         model_name="vgan",
         data_name="mnist",
-        save_step=25,
+        save_step=2,
     )

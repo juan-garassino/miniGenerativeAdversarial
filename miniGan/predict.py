@@ -7,14 +7,16 @@ import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 
 
-def predict(status, last=True, plot=False):
+def predict(status='generator-25', num_images = 16, last=True, plot=False):
+
     manager = Manager(model_name="vgan", data_name="mnist")
 
     generator = GeneratorNet()
+
     generator.load_state_dict(manager.load_models(status), strict=True)
 
-    num_images = 16
     test_noise = noise(num_images)
+
     predicted_images = vectors_to_images(generator(test_noise)).data
 
     if plot:
