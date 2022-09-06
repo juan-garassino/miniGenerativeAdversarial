@@ -215,7 +215,9 @@ class Manager:  # make manager work with and with out epochs
 
     @staticmethod
     def manager_step(epoch, n_batch, num_batches):
-        return epoch * num_batches + n_batch
+        if epoch and n_batch and num_batches:
+            return epoch * num_batches + n_batch
+        return 'for prediction'
 
     @staticmethod
     def make_directory(directory):
