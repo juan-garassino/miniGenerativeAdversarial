@@ -16,6 +16,7 @@ def main(
     batch_size=64,
     model_name="vgan",
     data_name="mnist",
+    save_step=25,
 ):
     # Load data
     data = mnist_data()
@@ -79,7 +80,7 @@ def main(
                     d_pred_fake,
                 )
 
-        if epoch + 1 % 1 == 0:
+        if epoch + 1 % save_step == 0:
             logger.save_models(generator, discriminator, epoch)
 
 
@@ -90,4 +91,5 @@ if __name__ == "__main__":
         batch_size=128,
         model_name="vgan",
         data_name="mnist",
+        save_step=25,
     )
