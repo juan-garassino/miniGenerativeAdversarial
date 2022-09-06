@@ -125,21 +125,21 @@ class Logger:
             d_pred_fake = d_pred_fake.data
 
         print(
-            Fore.GREEN
+            '\n✅ ' + Fore.MAGENTA
             + "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
                 epoch, num_epochs, n_batch, num_batches
             )
             + Style.RESET_ALL
         )
         print(
-            Fore.BLUE
+            '\n✅ ' + Fore.GREEN
             + "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
                 d_error, g_error
             )
             + Style.RESET_ALL
         )
         print(
-            Fore.YELLOW
+            '\n✅ ' + Fore.CYAN
             + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
                 d_pred_real.mean(), d_pred_fake.mean()
             )
@@ -151,6 +151,14 @@ class Logger:
         Logger._make_dir(out_dir)
         torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, epoch))
         torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, epoch))
+
+        print(
+            '\n✅' + Fore.YELLOW
+            + "Saved a model for epoch {}".format(
+                epoch
+            )
+            + Style.RESET_ALL
+        )
 
     def close(self):
         self.writer.close()

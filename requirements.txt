@@ -30,3 +30,8 @@ termcolor
 
 tensorboardX
 colorama
+torchvision
+torch
+transforms
+IPython
+matplotlib

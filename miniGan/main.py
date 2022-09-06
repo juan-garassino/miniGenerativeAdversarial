@@ -1,5 +1,3 @@
-from torchvision import transforms
-from torchvision import datasets
 from torch.autograd import Variable
 import torch
 
@@ -75,4 +73,5 @@ for epoch in range(num_epochs):
                 d_pred_fake,
             )
 
-            logger.save_models(generator, discriminator, epoch)
+    if epoch % 20 == 0:
+        logger.save_models(generator, discriminator, epoch)

@@ -1,3 +1,6 @@
+from torchvision import transforms
+from torchvision import datasets
+
 def mnist_data():
     compose = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
