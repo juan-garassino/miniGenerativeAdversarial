@@ -198,7 +198,7 @@ class Manager:  # make manager work with and with out epochs
         generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
 
         print(
-            "\n✅"
+            "\n✅ "
             + Fore.YELLOW
             + "Loaded model from {}...".format(input_dir[:59])
             + Style.RESET_ALL
@@ -217,7 +217,10 @@ class Manager:  # make manager work with and with out epochs
     def manager_step(epoch, n_batch, num_batches):
         if epoch and n_batch and num_batches:
             return epoch * num_batches + n_batch
-        return 'for prediction'
+
+        else:
+            epoch, n_batch, num_batches = 0, 0, 0
+            return epoch * num_batches + n_batch
 
     @staticmethod
     def make_directory(directory):
