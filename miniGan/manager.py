@@ -16,7 +16,7 @@ from colorama import Fore, Style
 """
 
 
-class Manager:
+class Manager:  # make manager work with and with out epochs
     def __init__(self, model_name, data_name):
         self.model_name = model_name
         self.data_name = data_name
@@ -35,9 +35,38 @@ class Manager:
         if isinstance(g_error, torch.autograd.Variable):
             g_error = g_error.data.cpu().numpy()
 
-        step = Manager._step(epoch, n_batch, num_batches)
+        step = Manager.manager_step(epoch, n_batch, num_batches)
         self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
         self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
+
+    def _save_images(self, fig, epoch, n_batch, comment=""):
+        out_dir = "./results/images/{}".format(self.data_subdir)
+        Manager.make_directory(out_dir)
+        fig.savefig(
+            "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
+        )
+
+    def save_torch_images(
+        self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
+    ):
+        out_dir = "./results/images/{}".format(self.data_subdir)
+        Manager.make_directory(out_dir)
+
+        # Plot and save horizontal
+        fig = plt.figure(figsize=(16, 16))
+        plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
+        plt.axis("off")
+        if plot_horizontal:
+            display.display(plt.gcf())
+        self._save_images(fig, epoch, n_batch, "hori")
+        plt.close()
+
+        # Save squared
+        fig = plt.figure()
+        plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
+        plt.axis("off")
+        self._save_images(fig, epoch, n_batch)
+        plt.close()
 
     def log_images(
         self,
@@ -58,7 +87,7 @@ class Manager:
         if format == "NHWC":
             images = images.transpose(1, 3)
 
-        step = Manager._step(epoch, n_batch, num_batches)
+        step = Manager.manager_step(epoch, n_batch, num_batches)
         img_name = "{}/images{}".format(self.comment, "")
 
         # Make horizontal grid from image tensor
@@ -72,35 +101,6 @@ class Manager:
 
         # Save plots
         self.save_torch_images(horizontal_grid, grid, epoch, n_batch)
-
-    def save_torch_images(
-        self, horizontal_grid, grid, epoch, n_batch, plot_horizontal=True
-    ):
-        out_dir = "./results/images/{}".format(self.data_subdir)
-        Manager._make_dir(out_dir)
-
-        # Plot and save horizontal
-        fig = plt.figure(figsize=(16, 16))
-        plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
-        plt.axis("off")
-        if plot_horizontal:
-            display.display(plt.gcf())
-        self._save_images(fig, epoch, n_batch, "hori")
-        plt.close()
-
-        # Save squared
-        fig = plt.figure()
-        plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
-        plt.axis("off")
-        self._save_images(fig, epoch, n_batch)
-        plt.close()
-
-    def _save_images(self, fig, epoch, n_batch, comment=""):
-        out_dir = "./results/images/{}".format(self.data_subdir)
-        Manager._make_dir(out_dir)
-        fig.savefig(
-            "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
-        )
 
     def display_status(
         self,
@@ -151,9 +151,11 @@ class Manager:
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
-        Manager._make_dir(out_dir)
+        Manager.make_directory(out_dir)
         torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, (epoch + 1)))
-        torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, (epoch + 1)))
+        torch.save(
+            discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, (epoch + 1))
+        )
 
         print(
             "\n✅"
@@ -176,7 +178,7 @@ class Manager:
 
         return generator
 
-    def close(self, generator, discriminator):
+    def close(self, generator, discriminator, out_dir, epoch):
         self.writer.close()
         torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, epoch))
         torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, epoch))
@@ -184,11 +186,11 @@ class Manager:
     # Private Functionality
 
     @staticmethod
-    def _step(epoch, n_batch, num_batches):
+    def manager_step(epoch, n_batch, num_batches):
         return epoch * num_batches + n_batch
 
     @staticmethod
-    def _make_dir(directory):
+    def make_directory(directory):
         try:
             os.makedirs(directory)
         except OSError as e:

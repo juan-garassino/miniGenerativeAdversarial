@@ -1,4 +1,3 @@
-from miniGan.manager import Manager
 from miniGan.utils import vectors_to_images, noise
 from miniGan.models import GeneratorNet
 from miniGan.manager import Manager
