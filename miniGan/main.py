@@ -68,7 +68,7 @@ def main(
                 test_images = test_images.data
 
                 # saves images
-                manager.snapshot(
+                manager.make_snapshot(
                     test_images, num_test_samples, epoch, n_batch, num_batches
                 )
                 # Display status Logs

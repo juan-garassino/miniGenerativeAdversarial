@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import errno
+from miniGan.predict import predict
 import torchvision.utils as vutils
 
 from tensorboardX import SummaryWriter
@@ -40,7 +41,7 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
         self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
 
-    def make_snapshot(
+    def single_snapshot(
         self, fig, epoch=None, n_batch=None, comment=""
     ):  # here option to save without epoch!!!
 
@@ -60,9 +61,16 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig("image[{}].png".format(now))
 
     def save_torch_images(
-        self, horizontal_grid, grid, epoch=None, n_batch=None, plot_horizontal=True
+        self, horizontal_grid, grid, epoch=None, n_batch=None, plot_horizontal=True, predict=False,
     ):
-        out_dir = "./results/images/{}".format(self.data_subdir)
+
+        if predict:
+            out_dir = "./results/generated/{}".format(self.data_subdir)
+
+        if not predict:
+            out_dir = "./results/images/{}".format(self.data_subdir)
+
+
         Manager.make_directory(out_dir)
 
         # Plot and save horizontal
@@ -72,7 +80,7 @@ class Manager:  # make manager work with and with out epochs
 
         if plot_horizontal:
             display.display(plt.gcf())
-            self.make_snapshot(fig, epoch, n_batch, "horizontal")
+            self.single_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
 
         # Save squared
@@ -81,10 +89,10 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if not plot_horizontal:
-            self.make_snapshot(fig, epoch, n_batch, "square")
+            self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
-    def snapshot(
+    def make_snapshot(
         self,
         images,
         num_images,
@@ -93,6 +101,7 @@ class Manager:  # make manager work with and with out epochs
         num_batches,
         format="NCHW",
         normalize=True,
+        predict=False
     ):
         """
         input images are expected in format (NCHW)
@@ -116,7 +125,11 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_image(img_name, horizontal_grid, step)
 
         # Save plots
-        self.save_torch_images(horizontal_grid, grid, epoch, n_batch)
+        self.save_torch_images(horizontal_grid,
+                               grid,
+                               epoch,
+                               n_batch,
+                               predict=False)
 
     def display_status(
         self,
