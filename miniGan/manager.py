@@ -84,7 +84,7 @@ class Manager:  # make manager work with and with out epochs
             self.make_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
-    def log_images(
+    def snapshot(
         self,
         images,
         num_images,

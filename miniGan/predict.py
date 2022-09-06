@@ -21,7 +21,7 @@ def predict(status='generator-25', num_images = 16, last=True, plot=False):
 
     if plot:
 
-        manager.log_images(predicted_images.detach().numpy(), 16, 1, 1, 1)
+        manager.snapshot(predicted_images.detach().numpy(), 16)
 
         nrows = int(np.sqrt(num_images))
 
