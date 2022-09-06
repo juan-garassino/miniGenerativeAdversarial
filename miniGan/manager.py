@@ -52,7 +52,7 @@ class Manager:  # make manager work with and with out epochs
             )
 
         if not epoch and n_batch:
-            out_dir = "./results/images/{}".format(self.data_subdir)
+            out_dir = "./results/generated/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
 
             now = datetime.now().strftime("%d-%m-%Y-%H-%M")
@@ -186,7 +186,7 @@ class Manager:  # make manager work with and with out epochs
         )
 
         print(
-            "\n✅"
+            "\n✅ "
             + Fore.YELLOW
             + "Saved model for epoch {}".format((epoch + 1))
             + Style.RESET_ALL
