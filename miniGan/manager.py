@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 import torch
 
 from colorama import Fore, Style
-import datetime
+from datetime import datetime
 
 
 """
