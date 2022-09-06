@@ -128,7 +128,7 @@ class Logger:
             "\n✅ "
             + Fore.MAGENTA
             + "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
-                epoch, num_epochs, n_batch, num_batches
+                (epoch + 1), num_epochs, n_batch, num_batches
             )
             + Style.RESET_ALL
         )
