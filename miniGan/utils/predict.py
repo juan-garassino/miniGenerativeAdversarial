@@ -6,6 +6,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 
+from datetime import datetime
+from colorama import Style, Fore
+
 
 def predict(status="generator-25", num_images=16, last=True, plot=False):
 
@@ -40,7 +43,7 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
 
         plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
 
-        out_dir = "./results/generated/{}".format(self.data_subdir)
+        out_dir = "./results/generated"
 
         Manager.make_directory(out_dir)
 

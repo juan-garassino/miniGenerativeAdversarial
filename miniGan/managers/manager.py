@@ -70,10 +70,7 @@ class Manager:  # make manager work with and with out epochs
         n_batch=None,
         plot_horizontal=False,
         plot_square=False
-        #predict=False,
     ):
-
-        Manager.make_directory(out_dir)
 
         # Plot and save horizontal
         fig = plt.figure(figsize=(25, 25))
@@ -107,7 +104,6 @@ class Manager:  # make manager work with and with out epochs
         num_batches=None,
         format="NCHW",
         normalize=True,
-        #predict=False,
         plot_horizontal=False,
         plot_square=False,
     ):
@@ -145,7 +141,6 @@ class Manager:  # make manager work with and with out epochs
                                n_batch,
                                plot_horizontal=plot_horizontal,
                                plot_square=plot_square,
-                               #predict=predict,
                                )
 
     def display_status(
