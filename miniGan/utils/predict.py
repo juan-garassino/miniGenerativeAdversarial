@@ -1,6 +1,6 @@
 from miniGan.utils.utils import vectors_to_images, noise
-from miniGan.model.models import GeneratorNet
-from miniGan.manager.managers import Manager
+from miniGan.models.model import GeneratorNet
+from miniGan.managers.manager import Manager
 
 import numpy as np
 import matplotlib.pyplot as plt
