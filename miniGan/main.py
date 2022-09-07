@@ -78,6 +78,8 @@ def main(
                     epoch=epoch,
                     n_batch=n_batch,
                     num_batches=num_batches,
+                    plot_horizontal=True,
+                    plot_square=True,
                 )
                 # Display status Logs
                 manager.display_status(
@@ -96,10 +98,10 @@ def main(
 
 
 if __name__ == "__main__":
-    main(num_epochs=200,
+    main(num_epochs=3,
          num_test_samples=32,
          batch_size=128,
          model_name="vgan",
          data_name="mnist",
-         save_step=2,
+         save_step=1,
          plot_step=50)

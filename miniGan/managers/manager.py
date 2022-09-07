@@ -45,15 +45,23 @@ class Manager:  # make manager work with and with out epochs
         self, fig, epoch=None, n_batch=None, comment=""
     ):  # here option to save without epoch!!!
 
-        if epoch and n_batch:
+        if comment and epoch and n_batch:
+
+            out_dir = "./results/images/horizontal/{}/{}".format(comment, self.data_subdir)
+
+            Manager.make_directory(out_dir)
+
+            fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))
+
+        """if epoch and n_batch:
             out_dir = "./results/images/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
-            fig.savefig(
-                "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
-            )
+            fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))"""
 
         if epoch == None and n_batch == None:
+
             out_dir = "./results/generated/{}".format(self.data_subdir)
+
             Manager.make_directory(out_dir)
 
             now = datetime.now().strftime("%d-%m-%Y-%H-%M")
@@ -66,8 +74,8 @@ class Manager:  # make manager work with and with out epochs
         grid,
         epoch=None,
         n_batch=None,
-        plot_horizontal=True,
-        plot_square=True,
+        plot_horizontal=False,
+        plot_square=False,
         predict=False,
     ):
 
@@ -86,6 +94,7 @@ class Manager:  # make manager work with and with out epochs
 
         if plot_horizontal:
             out_dir = "./results/images/horizontal/{}".format(self.data_subdir)
+            Manager.make_directory(out_dir)
             display.display(plt.gcf())
             self.single_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
@@ -97,6 +106,7 @@ class Manager:  # make manager work with and with out epochs
 
         if plot_square:
             out_dir = "./results/images/square/{}".format(self.data_subdir)
+            Manager.make_directory(out_dir)
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
@@ -110,6 +120,8 @@ class Manager:  # make manager work with and with out epochs
         format="NCHW",
         normalize=True,
         predict=False,
+        plot_horizontal=False,
+        plot_square=False,
     ):
         """
         input images are expected in format (NCHW)
@@ -137,7 +149,13 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_image(img_name, horizontal_grid, step)
 
         # Save plots
-        self.save_torch_images(horizontal_grid, grid, epoch, n_batch, predict=predict)
+        self.save_torch_images(horizontal_grid,
+                               grid,
+                               epoch,
+                               n_batch,
+                               plot_horizontal=plot_horizontal,
+                               plot_square=plot_square,
+                               predict=predict)
 
     def display_status(
         self,
