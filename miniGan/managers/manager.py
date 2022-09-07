@@ -52,7 +52,7 @@ class Manager:  # make manager work with and with out epochs
                 "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
             )
 
-        if not epoch or n_batch:
+        if epoch == None and n_batch == None:
             out_dir = "./results/generated/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
 
@@ -74,7 +74,7 @@ class Manager:  # make manager work with and with out epochs
         if predict:
             out_dir = "./results/generated/{}".format(self.data_subdir)
 
-        if not predict:
+        if predict == None:
             out_dir = "./results/images/{}".format(self.data_subdir)
 
         Manager.make_directory(out_dir)
@@ -85,6 +85,7 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if plot_horizontal:
+            out_dir = "./results/images/horizontal/{}".format(self.data_subdir)
             display.display(plt.gcf())
             self.single_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
@@ -95,6 +96,7 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if plot_square:
+            out_dir = "./results/images/square/{}".format(self.data_subdir)
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
@@ -119,10 +121,14 @@ class Manager:  # make manager work with and with out epochs
             images = images.transpose(1, 3)
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
+
+        print(step)
+
         img_name = "{}/images{}".format(self.comment, "")
 
         # Make horizontal grid from image tensor
         horizontal_grid = vutils.make_grid(images, normalize=normalize, scale_each=True)
+
         # Make vertical grid from image tensor
         nrows = int(np.sqrt(num_images))
         grid = vutils.make_grid(images, nrow=nrows, normalize=True, scale_each=True)
