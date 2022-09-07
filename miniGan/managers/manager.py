@@ -67,7 +67,7 @@ class Manager:  # make manager work with and with out epochs
         epoch=None,
         n_batch=None,
         plot_horizontal=True,
-        plot_square=True
+        plot_square=True,
         predict=False,
     ):
 
