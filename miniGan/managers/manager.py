@@ -51,6 +51,8 @@ class Manager:  # make manager work with and with out epochs
 
             Manager.make_directory(out_dir)
 
+            print(f'This directory has been created {out_dir}')
+
             fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))
 
         """if epoch and n_batch:
@@ -63,6 +65,8 @@ class Manager:  # make manager work with and with out epochs
             out_dir = "./results/generated/{}".format(self.data_subdir)
 
             Manager.make_directory(out_dir)
+
+            print(f'This directory has been created {out_dir}')
 
             now = datetime.now().strftime("%d-%m-%Y-%H-%M")
 
@@ -87,6 +91,8 @@ class Manager:  # make manager work with and with out epochs
 
         Manager.make_directory(out_dir)
 
+        print(f'This directory has been created {out_dir}')
+
         # Plot and save horizontal
         fig = plt.figure(figsize=(25, 25))
         plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
@@ -95,6 +101,7 @@ class Manager:  # make manager work with and with out epochs
         if plot_horizontal:
             out_dir = "./results/images/horizontal/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
+            print(f'This directory has been created {out_dir}')
             display.display(plt.gcf())
             self.single_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
@@ -107,6 +114,7 @@ class Manager:  # make manager work with and with out epochs
         if plot_square:
             out_dir = "./results/images/square/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
+            print(f'This directory has been created {out_dir}')
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
@@ -134,15 +142,18 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        print(step)
+        print(f'Step number {step}')
 
         img_name = "{}/images{}".format(self.comment, "")
+
+        print(f'Image name {img_name}')
 
         # Make horizontal grid from image tensor
         horizontal_grid = vutils.make_grid(images, normalize=normalize, scale_each=True)
 
         # Make vertical grid from image tensor
         nrows = int(np.sqrt(num_images))
+
         grid = vutils.make_grid(images, nrow=nrows, normalize=True, scale_each=True)
 
         # Add horizontal images to tensorboard
@@ -207,6 +218,9 @@ class Manager:  # make manager work with and with out epochs
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
         Manager.make_directory(out_dir)
+
+        print(f'This directory has been created {out_dir}')
+
         torch.save(
             generator.state_dict(),
             "{}/checkpoint-generator@{}".format(out_dir, (epoch + 1)),
