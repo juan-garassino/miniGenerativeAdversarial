@@ -100,15 +100,18 @@ def main(
                     d_pred_fake,
                 )
 
-                print('📶 ' + Fore.RED + "Time for minibatches between {} and {} is {} sec".format(
-                    N - n_batch + 1, n_batch + 1,
-                    time.time() - minibatch_start) + Style.RESET_ALL)
+                print('\n📶 ' + Fore.RED +
+                      "Time for minibatches between {} and {} is {} sec".
+                      format(n_batch - N + 1, n_batch + 1,
+                             time.time() - minibatch_start) + Style.RESET_ALL)
 
         if (epoch + 1) % save_step == 0:
             manager.save_models(generator, discriminator, epoch)
 
-        print('📶 ' + Fore.RED +
-              "Time for epoch {} is {} sec".format(epoch + 1, time.time() - start) + Style.RESET_ALL)
+        print('\n📶 ' + Fore.RED +
+              "Time for epoch {} is {} sec".format(epoch + 1,
+                                                   time.time() - start) +
+              Style.RESET_ALL)
 
 
 if __name__ == "__main__":
