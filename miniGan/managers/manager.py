@@ -56,7 +56,7 @@ class Manager:  # make manager work with and with out epochs
 
             fig.savefig(picture_name)
 
-            print("\n✅ " + Fore.BLUE +
+            print("\n🔽 " + Fore.BLUE +
                   f'This picture has been generated {picture_name}' +
                   Style.RESET_ALL)
 
@@ -77,7 +77,7 @@ class Manager:  # make manager work with and with out epochs
 
             fig.savefig(picture_name)
 
-            print("\n✅ " + Fore.BLUE +
+            print("\n🔽 " + Fore.BLUE +
                   f'This picture has been generated {picture_name}' +
                   Style.RESET_ALL)
 
@@ -147,14 +147,9 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        print(f'Step number {step}')
+        print("\n⏩ " + Fore.RED + f'Step number {step}' + Style.RESET_ALL)
 
         img_name = "{}/images{}".format(self.comment, "")
-
-        print(
-            "\n✅ "
-            + Fore.GREEN + f'Image name {img_name}' + Style.RESET_ALL
-        )
 
         # Make horizontal grid from image tensor
         horizontal_grid = vutils.make_grid(images, normalize=normalize, scale_each=True)
@@ -238,24 +233,17 @@ class Manager:  # make manager work with and with out epochs
             "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1)),
         )
 
-        print(
-            "\n✅ "
-            + Fore.GREEN
-            + "Saved model for epoch {}".format((epoch + 1))
-            + Style.RESET_ALL
-        )
+        print("\n🔽 " + Fore.GREEN +
+              "Saved model for epoch {}".format((epoch + 1)) + Style.RESET_ALL)
 
     def load_models(self, *args, last=True):
         parent = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..")
         input_dir = f"{parent}/results/models/{self.data_subdir}/{args[0]}"
         generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
 
-        print(
-            "\n✅ "
-            + Fore.YELLOW
-            + "Loaded model from {}...".format(input_dir[:59])
-            + Style.RESET_ALL
-        )
+        print("\n🔼 " + Fore.YELLOW +
+              "Loaded model from {}...".format(input_dir[:59]) +
+              Style.RESET_ALL)
 
         return generator
 
@@ -280,7 +268,7 @@ class Manager:  # make manager work with and with out epochs
         try:
             os.makedirs(directory)
 
-            print("\n✅ " + Fore.GREEN +
+            print("\n⏹ " + Fore.GREEN +
                   f'This directory has been created {directory}' +
                   Style.RESET_ALL)
 
