@@ -1,7 +1,6 @@
 import torch.nn as nn
 import torch
 
-
 class DiscriminatorNet(torch.nn.Module):
     """
     A three hidden-layer discriminative neural network

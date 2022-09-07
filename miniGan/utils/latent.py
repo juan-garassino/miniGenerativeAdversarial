@@ -8,7 +8,6 @@ from numpy import linspace
 from keras.models import load_model
 from matplotlib import pyplot
 
-
 # generate points in latent space as input for the generator
 def generate_latent_points(latent_dim, n_samples, n_classes=10):
     # generate points in the latent space

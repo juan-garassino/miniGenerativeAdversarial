@@ -1,13 +1,16 @@
+from miniGan.managers.manager import Manager
+from miniGan.managers.trainers import train_discriminator, train_generator
+
+from miniGan.utils.utils import noise, images_to_vectors, vectors_to_images
+
+from miniGan.models.models import GeneratorNet, DiscriminatorNet
+from miniGan.models.optimizers import discriminator_optimizer, generator_optimizer
+from miniGan.models.losses import loss
+
+from miniGan.sources.data import mnist_data
+
 from torch.autograd import Variable
 import torch
-
-from miniGan.manager import Manager
-from miniGan.utils import noise, images_to_vectors, vectors_to_images
-from miniGan.models import GeneratorNet, DiscriminatorNet
-from miniGan.trainers import train_discriminator, train_generator
-from miniGan.optimizers import discriminator_optimizer, generator_optimizer
-from miniGan.losses import loss
-from miniGan.data import mnist_data
 
 
 def main(
