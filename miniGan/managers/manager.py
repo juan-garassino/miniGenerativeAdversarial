@@ -51,8 +51,6 @@ class Manager:  # make manager work with and with out epochs
 
             Manager.make_directory(out_dir)
 
-            print(f'This directory has been created {out_dir}')
-
             fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))
 
         """if epoch and n_batch:
@@ -65,8 +63,6 @@ class Manager:  # make manager work with and with out epochs
             out_dir = "./results/generated/{}".format(self.data_subdir)
 
             Manager.make_directory(out_dir)
-
-            print(f'This directory has been created {out_dir}')
 
             now = datetime.now().strftime("%d-%m-%Y-%H-%M")
 
@@ -91,8 +87,6 @@ class Manager:  # make manager work with and with out epochs
 
         Manager.make_directory(out_dir)
 
-        print(f'This directory has been created {out_dir}')
-
         # Plot and save horizontal
         fig = plt.figure(figsize=(25, 25))
         plt.imshow(np.moveaxis(horizontal_grid.numpy(), 0, -1))
@@ -101,7 +95,6 @@ class Manager:  # make manager work with and with out epochs
         if plot_horizontal:
             out_dir = "./results/images/horizontal/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
-            print(f'This directory has been created {out_dir}')
             display.display(plt.gcf())
             self.single_snapshot(fig, epoch, n_batch, "horizontal")
             plt.close()
@@ -114,7 +107,6 @@ class Manager:  # make manager work with and with out epochs
         if plot_square:
             out_dir = "./results/images/square/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
-            print(f'This directory has been created {out_dir}')
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 
@@ -146,7 +138,10 @@ class Manager:  # make manager work with and with out epochs
 
         img_name = "{}/images{}".format(self.comment, "")
 
-        print(f'Image name {img_name}')
+        print(
+            "\n✅ "
+            + Fore.GREEN + f'Image name {img_name}' + Style.RESET_ALL
+        )
 
         # Make horizontal grid from image tensor
         horizontal_grid = vutils.make_grid(images, normalize=normalize, scale_each=True)
@@ -200,7 +195,7 @@ class Manager:  # make manager work with and with out epochs
         )
         print(
             "\n✅ "
-            + Fore.GREEN
+            + Fore.CYAN
             + "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
                 d_error, g_error
             )
@@ -232,7 +227,7 @@ class Manager:  # make manager work with and with out epochs
 
         print(
             "\n✅ "
-            + Fore.YELLOW
+            + Fore.GREEN
             + "Saved model for epoch {}".format((epoch + 1))
             + Style.RESET_ALL
         )
@@ -274,6 +269,9 @@ class Manager:  # make manager work with and with out epochs
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
+
+        print("\n✅ " + Fore.GREEN +
+              f'This directory has been created {directory}' + Style.RESET_ALL)
 
 
 if __name__ == "__main__":
