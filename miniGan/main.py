@@ -98,10 +98,10 @@ def main(
 
 
 if __name__ == "__main__":
-    main(num_epochs=3,
+    main(num_epochs=200,
          num_test_samples=32,
-         batch_size=128,
+         batch_size=16,
          model_name="vgan",
          data_name="mnist",
-         save_step=1,
-         plot_step=50)
+         save_step=20,
+         plot_step=150)

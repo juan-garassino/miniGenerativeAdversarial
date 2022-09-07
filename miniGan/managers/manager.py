@@ -59,7 +59,7 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig(picture_name)
 
             print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name} at {out_dir}' +
+                  f'Generated picture {picture_name} @ {out_dir}' +
                   Style.RESET_ALL)
 
     def save_torch_images(
