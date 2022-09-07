@@ -46,9 +46,9 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
 
         Manager.make_directory(out_dir)
 
-        now = datetime.now().strftime("%d-%m-%Y-%H-%M")
+        now = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
 
-        picture_name = "image[{}].png".format(now)
+        picture_name = "{}/image[{}].png".format(out_dir, now)
 
         plt.savefig(picture_name)
 
