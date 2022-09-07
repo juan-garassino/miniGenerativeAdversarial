@@ -102,7 +102,7 @@ def main(
 
                 print('\n📶 ' + Fore.RED +
                       "Time for minibatches between {} and {} is {} sec".
-                      format(n_batch - N + 1, n_batch + 1,
+                      format(n_batch + 1, n_batch + 1 + N,
                              time.time() - minibatch_start) + Style.RESET_ALL)
 
         if (epoch + 1) % save_step == 0:
