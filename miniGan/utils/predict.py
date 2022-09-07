@@ -23,13 +23,13 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
 
         manager.make_snapshot(
             predicted_images.detach().numpy(),
-            16,
+            num_images,
             epoch=None,
             n_batch=None,
             num_batches=None,
-            predict=True,
             plot_horizontal=True,
             plot_square=True,
+            predict=True,
         )
 
         nrows = int(np.sqrt(num_images))
@@ -38,7 +38,21 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
             predicted_images, nrow=nrows, normalize=True, scale_each=True
         )
 
-        return plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
+        plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
+
+        out_dir = "./results/generated/{}".format(self.data_subdir)
+
+        Manager.make_directory(out_dir)
+
+        now = datetime.now().strftime("%d-%m-%Y-%H-%M")
+
+        picture_name = "image[{}].png".format(now)
+
+        plt.savefig(picture_name)
+
+        print("\n🔽 " + Fore.BLUE +
+                  f'Generated picture {picture_name} at {out_dir}' +
+                  Style.RESET_ALL)
 
     return predicted_images
 

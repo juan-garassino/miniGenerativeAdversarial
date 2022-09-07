@@ -24,6 +24,7 @@ class Manager:  # make manager work with and with out epochs
         self.data_name = data_name
 
         self.comment = "{}_{}".format(model_name, data_name)
+
         self.data_subdir = "{}/{}".format(model_name, data_name)
 
         # TensorBoard
@@ -38,6 +39,7 @@ class Manager:  # make manager work with and with out epochs
             g_error = g_error.data.cpu().numpy()
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
+
         self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
         self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
 
@@ -47,28 +49,12 @@ class Manager:  # make manager work with and with out epochs
 
         if comment and epoch and n_batch:
 
-            out_dir = "./results/images/horizontal/{}/{}".format(comment, self.data_subdir)
+            out_dir = "./results/images/{}/{}".format(comment, self.data_subdir)
 
             Manager.make_directory(out_dir)
 
             picture_name = "{}/{}_epoch_{}_batch_{}.png".format(
                 out_dir, comment, epoch, n_batch)
-
-            fig.savefig(picture_name)
-
-            print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name} at {out_dir}' +
-                  Style.RESET_ALL)
-
-        if epoch == None and n_batch == None:
-
-            out_dir = "./results/generated/{}".format(self.data_subdir)
-
-            Manager.make_directory(out_dir)
-
-            now = datetime.now().strftime("%d-%m-%Y-%H-%M")
-
-            picture_name = "image[{}].png".format(now)
 
             fig.savefig(picture_name)
 
@@ -83,15 +69,9 @@ class Manager:  # make manager work with and with out epochs
         epoch=None,
         n_batch=None,
         plot_horizontal=False,
-        plot_square=False,
-        predict=False,
+        plot_square=False
+        #predict=False,
     ):
-
-        if predict:
-            out_dir = "./results/generated/{}".format(self.data_subdir)
-
-        if not predict:
-            out_dir = "./results/images/{}".format(self.data_subdir)
 
         Manager.make_directory(out_dir)
 
@@ -127,7 +107,7 @@ class Manager:  # make manager work with and with out epochs
         num_batches=None,
         format="NCHW",
         normalize=True,
-        predict=False,
+        #predict=False,
         plot_horizontal=False,
         plot_square=False,
     ):
@@ -165,7 +145,8 @@ class Manager:  # make manager work with and with out epochs
                                n_batch,
                                plot_horizontal=plot_horizontal,
                                plot_square=plot_square,
-                               predict=predict)
+                               #predict=predict,
+                               )
 
     def display_status(
         self,
@@ -216,9 +197,8 @@ class Manager:  # make manager work with and with out epochs
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
-        Manager.make_directory(out_dir)
 
-        print(f'This directory has been created {out_dir}')
+        Manager.make_directory(out_dir)
 
         torch.save(
             generator.state_dict(),
