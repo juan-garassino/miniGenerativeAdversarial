@@ -224,7 +224,7 @@ class Manager:  # make manager work with and with out epochs
         )
 
     def load_models(self, *args, last=True):
-        parent = os.path.join(os.path.dirname(os.path.dirname(__file__), ".."))
+        parent = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..")
         input_dir = f"{parent}/results/models/{self.data_subdir}/{args[0]}"
         generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
 
