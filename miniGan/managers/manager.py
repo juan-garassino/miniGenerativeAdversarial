@@ -173,22 +173,11 @@ class Manager:  # make manager work with and with out epochs
             )
             + Style.RESET_ALL
         )
-        print(
-            "\n✅ "
-            + Fore.CYAN
-            + "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
-                d_error, g_error
-            )
-            + Style.RESET_ALL
-        )
-        print(
-            "\n✅ "
-            + Fore.CYAN
-            + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
-                d_pred_real.mean(), d_pred_fake.mean()
-            )
-            + Style.RESET_ALL
-        )
+        print("\nℹ️ " + Fore.CYAN +
+              "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
+                  d_error, g_error) + Style.RESET_ALL)
+        print("\nℹ️ " + Fore.CYAN + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
+            d_pred_real.mean(), d_pred_fake.mean()) + Style.RESET_ALL)
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)

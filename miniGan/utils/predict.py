@@ -32,7 +32,6 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
             num_batches=None,
             plot_horizontal=True,
             plot_square=True,
-            predict=True,
         )
 
         nrows = int(np.sqrt(num_images))
