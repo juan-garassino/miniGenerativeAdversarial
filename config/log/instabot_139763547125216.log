@@ -1,0 +1,8 @@
+2022-09-07 10:06:31,783 - instabot version: 0.108.0 (bot) - INFO - Instabot version: 0.108.0 Started
+2022-09-07 10:06:31,784 - instabot version: 0.108.0 (api_login) - INFO - PRE-LOGIN FLOW!... 
+2022-09-07 10:06:43,642 - instabot version: 0.108.0 (api) - ERROR - Request returns 400 error!
+2022-09-07 10:06:43,642 - instabot version: 0.108.0 (api) - INFO - Instagram's error message: challenge_required
+2022-09-07 10:06:43,642 - instabot version: 0.108.0 (api) - INFO - Error type: checkpoint_challenge_required
+2022-09-07 10:06:43,642 - instabot version: 0.108.0 (api) - INFO - Checkpoint challenge required...
+2022-09-07 10:06:47,315 - instabot version: 0.108.0 (api_photo) - ERROR - Photo Upload failed with the following response: <Response [403]>
+2022-09-07 10:06:47,316 - instabot version: 0.108.0 (bot_photo) - INFO - Photo '/home/juan-garassino/code/juan-garassino/miniSeries/miniGan/results/generated/download.png' is not uploaded.

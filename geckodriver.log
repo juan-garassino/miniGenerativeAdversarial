@@ -1,0 +1,105 @@
+update.go:85: cannot change mount namespace according to change mount (/var/lib/snapd/hostfs/usr/share/libreoffice/help /usr/share/libreoffice/help none bind,ro 0 0): cannot create directory "/usr/share/libreoffice/help": permission denied
+update.go:85: cannot change mount namespace according to change mount (/var/lib/snapd/hostfs/usr/share/xubuntu-docs /usr/share/xubuntu-docs none bind,ro 0 0): cannot open directory "/var/lib": permission denied
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+1662540900313	geckodriver	INFO	Listening on 127.0.0.1:48607
+1662540900660	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "59997" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilerYNbnP"
+Gtk-Message: 10:55:00.754: Failed to load module "canberra-gtk-module"
+Gtk-Message: 10:55:00.757: Failed to load module "canberra-gtk-module"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662540901669	Marionette	INFO	Marionette enabled
+1662540901673	Marionette	INFO	Listening on port 38443
+WebDriver BiDi listening on ws://localhost:59997
+Read port: 38443
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662540901881	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilerYNbnP/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://localhost:59997/devtools/browser/0205b0ac-228f-4576-85e2-39f715f771da
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+1662540905281	geckodriver	INFO	Listening on 127.0.0.1:33035
+1662540905744	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "38093" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileoAw2kK"
+Gtk-Message: 10:55:05.827: Failed to load module "canberra-gtk-module"
+Gtk-Message: 10:55:05.828: Failed to load module "canberra-gtk-module"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662540906388	Marionette	INFO	Marionette enabled
+1662540906391	Marionette	INFO	Listening on port 33021
+WebDriver BiDi listening on ws://localhost:38093
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 33021
+1662540906584	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoAw2kK/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://localhost:38093/devtools/browser/da57a6a9-b211-454b-8448-ea750786fa21
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2013\"  data: no]"
+1662540948127	Marionette	INFO	Stopped listening on port 33021
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2013\"  data: no]"
+1662540951542	Marionette	INFO	Stopped listening on port 38443
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+1662540986726	geckodriver	INFO	Listening on 127.0.0.1:42673
+1662540987187	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "42253" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileqTH0Eu"
+Gtk-Message: 10:56:27.266: Failed to load module "canberra-gtk-module"
+Gtk-Message: 10:56:27.267: Failed to load module "canberra-gtk-module"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662540987788	Marionette	INFO	Marionette enabled
+1662540987791	Marionette	INFO	Listening on port 45033
+WebDriver BiDi listening on ws://localhost:42253
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 45033
+1662540988075	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileqTH0Eu/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://localhost:42253/devtools/browser/364a43ed-036a-4d21-916a-32dd2cdbc1a5
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+1662540991018	geckodriver	INFO	Listening on 127.0.0.1:49601
+1662540991483	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "42551" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileoFCdgu"
+Gtk-Message: 10:56:31.567: Failed to load module "canberra-gtk-module"
+Gtk-Message: 10:56:31.568: Failed to load module "canberra-gtk-module"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662540992129	Marionette	INFO	Marionette enabled
+1662540992132	Marionette	INFO	Listening on port 38197
+WebDriver BiDi listening on ws://localhost:42551
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 38197
+1662540992288	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoFCdgu/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://localhost:42551/devtools/browser/df9762dd-9ff2-446b-8d07-d7b268a25772
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2013\"  data: no]"
+1662540999672	Marionette	INFO	Stopped listening on port 38197
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2013\"  data: no]"
+1662541000376	Marionette	INFO	Stopped listening on port 45033
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+1662541200737	geckodriver	INFO	Listening on 127.0.0.1:41925
+1662541201215	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "46127" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile3aWH0n"
+Gtk-Message: 11:00:01.321: Failed to load module "canberra-gtk-module"
+Gtk-Message: 11:00:01.323: Failed to load module "canberra-gtk-module"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1662541201857	Marionette	INFO	Marionette enabled
+1662541201861	Marionette	INFO	Listening on port 36907
+WebDriver BiDi listening on ws://localhost:46127
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 36907
+1662541202032	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile3aWH0n/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://localhost:46127/devtools/browser/5d2347a2-33b0-437c-b180-0f22a2a85055
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2013\"  data: no]"
+1662541266592	Marionette	INFO	Stopped listening on port 36907
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo

@@ -64,4 +64,7 @@ run_model:
 	python -m miniGan.main
 
 predict:
-	python -m miniGan.predict
+	python -m miniGan.utils.predict
+
+post_instagram:
+	python -m miniGan.agent.agent
