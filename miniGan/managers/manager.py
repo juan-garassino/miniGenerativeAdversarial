@@ -51,7 +51,14 @@ class Manager:  # make manager work with and with out epochs
 
             Manager.make_directory(out_dir)
 
-            fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))
+            picture_name = "{}/{}_epoch_{}_batch_{}.png".format(
+                out_dir, comment, epoch, n_batch)
+
+            fig.savefig(picture_name)
+
+            print("\n✅ " + Fore.BLUE +
+                  f'This picture has been generated {picture_name}' +
+                  Style.RESET_ALL)
 
         """if epoch and n_batch:
             out_dir = "./results/images/{}".format(self.data_subdir)
@@ -66,7 +73,13 @@ class Manager:  # make manager work with and with out epochs
 
             now = datetime.now().strftime("%d-%m-%Y-%H-%M")
 
-            fig.savefig("image[{}].png".format(now))
+            picture_name = "image[{}].png".format(now)
+
+            fig.savefig(picture_name)
+
+            print("\n✅ " + Fore.BLUE +
+                  f'This picture has been generated {picture_name}' +
+                  Style.RESET_ALL)
 
     def save_torch_images(
         self,
@@ -266,12 +279,14 @@ class Manager:  # make manager work with and with out epochs
     def make_directory(directory):
         try:
             os.makedirs(directory)
+
+            print("\n✅ " + Fore.GREEN +
+                  f'This directory has been created {directory}' +
+                  Style.RESET_ALL)
+
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
-
-        print("\n✅ " + Fore.GREEN +
-              f'This directory has been created {directory}' + Style.RESET_ALL)
 
 
 if __name__ == "__main__":
