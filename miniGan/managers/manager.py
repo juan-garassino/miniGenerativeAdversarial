@@ -52,7 +52,7 @@ class Manager:  # make manager work with and with out epochs
                 "{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch)
             )
 
-        if not epoch and n_batch:
+        if not epoch or n_batch:
             out_dir = "./results/generated/{}".format(self.data_subdir)
             Manager.make_directory(out_dir)
 
@@ -67,6 +67,7 @@ class Manager:  # make manager work with and with out epochs
         epoch=None,
         n_batch=None,
         plot_horizontal=True,
+        plot_square=True
         predict=False,
     ):
 
@@ -93,7 +94,7 @@ class Manager:  # make manager work with and with out epochs
         plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
         plt.axis("off")
 
-        if not plot_horizontal:
+        if plot_square:
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
 

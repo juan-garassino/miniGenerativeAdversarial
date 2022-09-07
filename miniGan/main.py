@@ -20,6 +20,7 @@ def main(
     model_name="vgan",
     data_name="mnist",
     save_step=25,
+    plot_step=50,
 ):
     # Load data
     data = mnist_data()
@@ -65,7 +66,7 @@ def main(
             # Log batch error
             manager.log(d_error, g_error, epoch, n_batch, num_batches)
             # Display Progress every few batches
-            if (n_batch) % 100 == 0:
+            if (n_batch) % plot_step == 0:
 
                 test_images = vectors_to_images(generator(test_noise))
                 test_images = test_images.data
