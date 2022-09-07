@@ -18,7 +18,6 @@ from datetime import datetime
 
 
 class Manager:  # make manager work with and with out epochs
-
     def __init__(self, model_name, data_name):
         self.model_name = model_name
         self.data_name = data_name
@@ -54,13 +53,17 @@ class Manager:  # make manager work with and with out epochs
             Manager.make_directory(out_dir)
 
             picture_name = "{}/{}_epoch_{}_batch_{}.png".format(
-                out_dir, comment, epoch, n_batch)
+                out_dir, comment, epoch, n_batch
+            )
 
             fig.savefig(picture_name)
 
-            print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name} @ {out_dir}' +
-                  Style.RESET_ALL)
+            print(
+                "\n🔽 "
+                + Fore.BLUE
+                + f"Generated picture {picture_name} @ {out_dir}"
+                + Style.RESET_ALL
+            )
 
     def save_torch_images(
         self,
@@ -69,7 +72,7 @@ class Manager:  # make manager work with and with out epochs
         epoch=None,
         n_batch=None,
         plot_horizontal=False,
-        plot_square=False
+        plot_square=False,
     ):
 
         # Plot and save horizontal
@@ -118,8 +121,7 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        print("\n⏩ " + Fore.RED + f'Step number {step}' + Style.RESET_ALL +
-              '\n')
+        print("\n⏩ " + Fore.RED + f"Step number {step}" + Style.RESET_ALL + "\n")
 
         img_name = "{}/images{}".format(self.comment, "")
 
@@ -135,13 +137,14 @@ class Manager:  # make manager work with and with out epochs
         self.writer.add_image(img_name, horizontal_grid, step)
 
         # Save plots
-        self.save_torch_images(horizontal_grid,
-                               grid,
-                               epoch,
-                               n_batch,
-                               plot_horizontal=plot_horizontal,
-                               plot_square=plot_square,
-                               )
+        self.save_torch_images(
+            horizontal_grid,
+            grid,
+            epoch,
+            n_batch,
+            plot_horizontal=plot_horizontal,
+            plot_square=plot_square,
+        )
 
     def display_status(
         self,
@@ -173,11 +176,22 @@ class Manager:  # make manager work with and with out epochs
             )
             + Style.RESET_ALL
         )
-        print("\nℹ️ " + Fore.CYAN +
-              "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
-                  d_error, g_error) + Style.RESET_ALL)
-        print("\nℹ️ " + Fore.CYAN + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
-            d_pred_real.mean(), d_pred_fake.mean()) + Style.RESET_ALL)
+        print(
+            "\nℹ️ "
+            + Fore.CYAN
+            + "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
+                d_error, g_error
+            )
+            + Style.RESET_ALL
+        )
+        print(
+            "\nℹ️ "
+            + Fore.CYAN
+            + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
+                d_pred_real.mean(), d_pred_fake.mean()
+            )
+            + Style.RESET_ALL
+        )
 
     def save_models(self, generator, discriminator, epoch):
         out_dir = "./results/models/{}".format(self.data_subdir)
@@ -193,17 +207,24 @@ class Manager:  # make manager work with and with out epochs
             "{}/checkpointCritic-{}".format(out_dir, (epoch + 1)),
         )
 
-        print("\n🔽 " + Fore.YELLOW +
-              "Saved model for epoch {}".format((epoch + 1)) + Style.RESET_ALL)
+        print(
+            "\n🔽 "
+            + Fore.YELLOW
+            + "Saved model for epoch {}".format((epoch + 1))
+            + Style.RESET_ALL
+        )
 
     def load_models(self, *args, last=True):
         parent = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..")
         input_dir = f"{parent}/results/models/{self.data_subdir}/{args[0]}"
         generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
 
-        print("\n🔼 " + Fore.YELLOW +
-              "Loaded model from {}...".format(input_dir[:59]) +
-              Style.RESET_ALL)
+        print(
+            "\n🔼 "
+            + Fore.YELLOW
+            + "Loaded model from {}...".format(input_dir[:59])
+            + Style.RESET_ALL
+        )
 
         return generator
 
@@ -228,9 +249,12 @@ class Manager:  # make manager work with and with out epochs
         try:
             os.makedirs(directory)
 
-            print("\n⏹ " + Fore.GREEN +
-                  f'This directory has been created {directory}' +
-                  Style.RESET_ALL)
+            print(
+                "\n⏹ "
+                + Fore.GREEN
+                + f"This directory has been created {directory}"
+                + Style.RESET_ALL
+            )
 
         except OSError as e:
             if e.errno != errno.EEXIST:

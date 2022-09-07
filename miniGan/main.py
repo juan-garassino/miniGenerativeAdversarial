@@ -15,7 +15,6 @@ from torch.autograd import Variable
 import torch
 
 
-
 def main(
     num_epochs=100,
     num_test_samples=16,
@@ -100,25 +99,33 @@ def main(
                     d_pred_fake,
                 )
 
-                print('\n📶 ' + Fore.RED +
-                      "Time for minibatches between {} and {} is {} sec".
-                      format(n_batch + 1, n_batch + 1 + N,
-                             time.time() - minibatch_start) + Style.RESET_ALL)
+                print(
+                    "\n📶 "
+                    + Fore.RED
+                    + "Time for minibatches between {} and {} is {} sec".format(
+                        n_batch + 1, n_batch + 1 + N, time.time() - minibatch_start
+                    )
+                    + Style.RESET_ALL
+                )
 
         if (epoch + 1) % save_step == 0:
             manager.save_models(generator, discriminator, epoch)
 
-        print('\n📶 ' + Fore.RED +
-              "Time for epoch {} is {} sec".format(epoch + 1,
-                                                   time.time() - start) +
-              Style.RESET_ALL)
+        print(
+            "\n📶 "
+            + Fore.RED
+            + "Time for epoch {} is {} sec".format(epoch + 1, time.time() - start)
+            + Style.RESET_ALL
+        )
 
 
 if __name__ == "__main__":
-    main(num_epochs=200,
-         num_test_samples=32,
-         batch_size=16,
-         model_name="vgan",
-         data_name="mnist",
-         save_step=20,
-         plot_step=150)
+    main(
+        num_epochs=200,
+        num_test_samples=32,
+        batch_size=16,
+        model_name="vgan",
+        data_name="mnist",
+        save_step=20,
+        plot_step=150,
+    )

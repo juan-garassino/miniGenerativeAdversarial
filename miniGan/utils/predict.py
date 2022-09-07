@@ -52,9 +52,12 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
 
         plt.savefig(picture_name)
 
-        print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name} at {out_dir}' +
-                  Style.RESET_ALL)
+        print(
+            "\n🔽 "
+            + Fore.BLUE
+            + f"Generated picture {picture_name} at {out_dir}"
+            + Style.RESET_ALL
+        )
 
     return predicted_images
 

@@ -1,5 +1,6 @@
 import torch
 
+
 def discriminator_optimizer(discriminator):
     d_optimizer = torch.optim.Adam(discriminator.parameters(), lr=0.0002)
     return discriminator, d_optimizer

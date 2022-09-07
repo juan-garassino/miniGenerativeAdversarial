@@ -8,7 +8,7 @@ check_code:
 	@flake8 scripts/* miniGan/*.py
 
 black:
-	@black scripts/* miniGan/*.py
+	@black scripts/* miniGan/*.py miniGan/*/*.py
 
 test:
 	@coverage run -m pytest tests/*.py
