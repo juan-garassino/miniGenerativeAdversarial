@@ -57,13 +57,8 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig(picture_name)
 
             print("\n🔽 " + Fore.BLUE +
-                  f'This picture has been generated {picture_name}' +
+                  f'Generated picture {picture_name}' +
                   Style.RESET_ALL)
-
-        """if epoch and n_batch:
-            out_dir = "./results/images/{}".format(self.data_subdir)
-            Manager.make_directory(out_dir)
-            fig.savefig("{}/{}_epoch_{}_batch_{}.png".format(out_dir, comment, epoch, n_batch))"""
 
         if epoch == None and n_batch == None:
 
@@ -78,7 +73,7 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig(picture_name)
 
             print("\n🔽 " + Fore.BLUE +
-                  f'This picture has been generated {picture_name}' +
+                  f'Generated picture {picture_name}' +
                   Style.RESET_ALL)
 
     def save_torch_images(
@@ -147,7 +142,8 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        print("\n⏩ " + Fore.RED + f'Step number {step}' + Style.RESET_ALL)
+        print("\n⏩ " + Fore.RED + f'Step number {step}' + Style.RESET_ALL +
+              '\n')
 
         img_name = "{}/images{}".format(self.comment, "")
 
@@ -233,7 +229,7 @@ class Manager:  # make manager work with and with out epochs
             "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1)),
         )
 
-        print("\n🔽 " + Fore.GREEN +
+        print("\n🔽 " + Fore.YELLOW +
               "Saved model for epoch {}".format((epoch + 1)) + Style.RESET_ALL)
 
     def load_models(self, *args, last=True):
