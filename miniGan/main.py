@@ -3,7 +3,7 @@ from miniGan.managers.trainers import train_discriminator, train_generator
 
 from miniGan.utils.utils import noise, images_to_vectors, vectors_to_images
 
-from miniGan.models.models import GeneratorNet, DiscriminatorNet
+from miniGan.models.model import GeneratorNet, DiscriminatorNet
 from miniGan.models.optimizers import discriminator_optimizer, generator_optimizer
 from miniGan.models.losses import loss
 

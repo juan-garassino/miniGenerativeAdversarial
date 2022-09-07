@@ -74,7 +74,7 @@ class Manager:  # make manager work with and with out epochs
         if predict:
             out_dir = "./results/generated/{}".format(self.data_subdir)
 
-        if predict == None:
+        if not predict:
             out_dir = "./results/images/{}".format(self.data_subdir)
 
         Manager.make_directory(out_dir)
