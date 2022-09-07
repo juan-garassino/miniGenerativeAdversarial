@@ -57,7 +57,7 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig(picture_name)
 
             print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name}' +
+                  f'Generated picture {picture_name} at {out_dir}' +
                   Style.RESET_ALL)
 
         if epoch == None and n_batch == None:
@@ -73,7 +73,7 @@ class Manager:  # make manager work with and with out epochs
             fig.savefig(picture_name)
 
             print("\n🔽 " + Fore.BLUE +
-                  f'Generated picture {picture_name}' +
+                  f'Generated picture {picture_name} at {out_dir}' +
                   Style.RESET_ALL)
 
     def save_torch_images(
@@ -222,11 +222,11 @@ class Manager:  # make manager work with and with out epochs
 
         torch.save(
             generator.state_dict(),
-            "{}/checkpoint-generator@{}".format(out_dir, (epoch + 1)),
+            "{}/checkpointGenerator-{}".format(out_dir, (epoch + 1)),
         )
         torch.save(
             discriminator.state_dict(),
-            "{}/checkpoint-critic@{}".format(out_dir, (epoch + 1)),
+            "{}/checkpointCritic-{}".format(out_dir, (epoch + 1)),
         )
 
         print("\n🔽 " + Fore.YELLOW +
