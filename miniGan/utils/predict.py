@@ -53,7 +53,7 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
                 os.environ.get("HOME"),
                 "..",
                 "content",
-                "Results",
+                "results",
                 "miniGan",
                 "predictions",
             )
