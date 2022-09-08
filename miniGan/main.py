@@ -104,7 +104,9 @@ def main(
                     "\n📶 "
                     + Fore.RED
                     + "Time for samples between {} and {} is {} sec".format(
-                        n_batch + 1, n_batch + 1 + N, time.time() - minibatch_start
+                        (n_batch * N),
+                        ((n_batch + 1) * N),
+                        time.time() - minibatch_start,
                     )
                     + Style.RESET_ALL
                 )
