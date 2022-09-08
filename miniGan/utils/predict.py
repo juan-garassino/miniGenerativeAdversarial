@@ -2,13 +2,14 @@ from miniGan.utils.utils import vectors_to_images, noise
 from miniGan.models.model import GeneratorNet
 from miniGan.managers.manager import Manager
 
+from datetime import datetime
+from colorama import Style, Fore
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 
-from datetime import datetime
-from colorama import Style, Fore
-import os
+
 
 
 def predict(status="generator-25", num_images=16, last=True, plot=False):

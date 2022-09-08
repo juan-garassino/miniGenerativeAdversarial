@@ -1,14 +1,14 @@
+from matplotlib import pyplot as plt
+from colorama import Fore, Style
 import os
 import numpy as np
 import errno
-import torchvision.utils as vutils
 
 from tensorboardX import SummaryWriter
-from IPython import display
-from matplotlib import pyplot as plt
+import torchvision.utils as vutils
 import torch
+from IPython import display
 
-from colorama import Fore, Style
 
 """
     TensorBoard Data will be stored in './runs' path
