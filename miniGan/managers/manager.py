@@ -302,8 +302,8 @@ class Manager:  # make manager work with and with out epochs
             os.environ.get("HOME"),
             "Results",
             "checkpoints",
-            {self.data_subdir},
-            {args[0]},
+            self.data_subdir,
+            args[0],
         )
 
         if int(os.environ.get("COLAB")) == 1:
@@ -312,11 +312,11 @@ class Manager:  # make manager work with and with out epochs
                 os.environ.get("HOME"),
                 "..",
                 "content",
-                "Results",
+                "results",
                 "miniGan",
                 "checkpoints",
-                {self.data_subdir},
-                {args[0]},
+                self.data_subdir,
+                args[0],
             )
 
         generator = torch.load(input_dir, map_location=lambda storage, loc: storage)

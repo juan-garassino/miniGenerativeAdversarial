@@ -10,6 +10,7 @@ from miniGan.models.losses import loss
 from miniGan.sources.data import mnist_data
 
 import time
+import os
 from colorama import Fore, Style
 from torch.autograd import Variable
 import torch
@@ -121,11 +122,11 @@ def main(
 
 if __name__ == "__main__":
     main(
-        num_epochs=3,
-        num_test_samples=32,
-        batch_size=16,
+        num_epochs=int(os.environ.get("N_EPOCHS")),
+        num_test_samples=int(os.environ.get("N_SAMPLES")),
+        batch_size=int(os.environ.get("BATCH_SIZE")),
         model_name="vgan",
         data_name="mnist",
-        save_step=1,
-        plot_step=50,
+        save_step=int(os.environ.get("CHECKPOINT_STEP")),
+        plot_step=int(os.environ.get("SNAPSHOT_STEP")),
     )
