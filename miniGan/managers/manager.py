@@ -10,14 +10,13 @@ import torch
 
 from colorama import Fore, Style
 from datetime import datetime
-
-
 """
     TensorBoard Data will be stored in './runs' path
 """
 
 
 class Manager:  # make manager work with and with out epochs
+
     def __init__(self, model_name, data_name):
         self.model_name = model_name
         self.data_name = data_name
@@ -39,41 +38,47 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        self.writer.add_scalar("{}/D_error".format(self.comment), d_error, step)
-        self.writer.add_scalar("{}/G_error".format(self.comment), g_error, step)
+        self.writer.add_scalar("{}/D_error".format(self.comment), d_error,
+                               step)
+        self.writer.add_scalar("{}/G_error".format(self.comment), g_error,
+                               step)
 
-    def single_snapshot(
-        self, fig, epoch=None, n_batch=None, comment=""
-    ):  # here option to save without epoch!!!
+    def single_snapshot(self,
+                        fig,
+                        epoch=None,
+                        n_batch=None,
+                        comment=""):  # here option to save without epoch!!!
 
         if comment and epoch and n_batch:
 
-            out_dir = "./results/images/{}/{}".format(comment, self.data_subdir)
+            if int(os.environ.get('COLAB')) == 1:
+
+                out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                       'miniGan', 'snapshots', comment,
+                                       self.data_subdir)
+
+            out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                   'miniGan', 'snapshots', comment,
+                                   self.data_subdir)
 
             Manager.make_directory(out_dir)
 
             picture_name = "{}/{}_epoch_{}_batch_{}.png".format(
-                out_dir, comment, epoch, n_batch
-            )
+                out_dir, comment, epoch, n_batch)
 
             fig.savefig(picture_name)
 
-            print(
-                "\n🔽 "
-                + Fore.BLUE
-                + f"Generated picture {picture_name} @ {out_dir}"
-                + Style.RESET_ALL
-            )
+            print("\n🔽 " + Fore.BLUE +
+                  f'Generated picture {picture_name} @ {out_dir}' +
+                  Style.RESET_ALL)
 
-    def save_torch_images(
-        self,
-        horizontal_grid,
-        grid,
-        epoch=None,
-        n_batch=None,
-        plot_horizontal=False,
-        plot_square=False,
-    ):
+    def save_torch_images(self,
+                          horizontal_grid,
+                          grid,
+                          epoch=None,
+                          n_batch=None,
+                          plot_horizontal=False,
+                          plot_square=False):
 
         # Plot and save horizontal
         fig = plt.figure(figsize=(25, 25))
@@ -81,7 +86,17 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if plot_horizontal:
-            out_dir = "./results/images/horizontal/{}".format(self.data_subdir)
+
+            if int(os.environ.get('COLAB')) == 1:
+
+                out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                       'miniGan', 'snapshots', 'horizontal',
+                                       self.data_subdir)
+
+            out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                   'miniGan', 'snapshots', 'horizontal',
+                                   self.data_subdir)
+
             Manager.make_directory(out_dir)
             display.display(plt.gcf())
             self.single_snapshot(fig, epoch, n_batch, "horizontal")
@@ -93,7 +108,17 @@ class Manager:  # make manager work with and with out epochs
         plt.axis("off")
 
         if plot_square:
-            out_dir = "./results/images/square/{}".format(self.data_subdir)
+
+            if int(os.environ.get('COLAB')) == 1:
+
+                out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                       'miniGan', 'snapshots', 'square',
+                                       self.data_subdir)
+
+            out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                   'miniGan', 'snapshots', 'square',
+                                   self.data_subdir)
+
             Manager.make_directory(out_dir)
             self.single_snapshot(fig, epoch, n_batch, "square")
             plt.close()
@@ -121,17 +146,23 @@ class Manager:  # make manager work with and with out epochs
 
         step = Manager.manager_step(epoch, n_batch, num_batches)
 
-        print("\n⏩ " + Fore.RED + f"Step number {step}" + Style.RESET_ALL + "\n")
+        print("\n⏩ " + Fore.RED + f'Step number {step}' + Style.RESET_ALL +
+              '\n')
 
         img_name = "{}/images{}".format(self.comment, "")
 
         # Make horizontal grid from image tensor
-        horizontal_grid = vutils.make_grid(images, normalize=normalize, scale_each=True)
+        horizontal_grid = vutils.make_grid(images,
+                                           normalize=normalize,
+                                           scale_each=True)
 
         # Make vertical grid from image tensor
         nrows = int(np.sqrt(num_images))
 
-        grid = vutils.make_grid(images, nrow=nrows, normalize=True, scale_each=True)
+        grid = vutils.make_grid(images,
+                                nrow=nrows,
+                                normalize=True,
+                                scale_each=True)
 
         # Add horizontal images to tensorboard
         self.writer.add_image(img_name, horizontal_grid, step)
@@ -168,33 +199,26 @@ class Manager:  # make manager work with and with out epochs
         if isinstance(d_pred_fake, torch.autograd.Variable):
             d_pred_fake = d_pred_fake.data
 
-        print(
-            "\n✅ "
-            + Fore.MAGENTA
-            + "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
-                (epoch + 1), num_epochs, n_batch, num_batches
-            )
-            + Style.RESET_ALL
-        )
-        print(
-            "\nℹ️ "
-            + Fore.CYAN
-            + "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
-                d_error, g_error
-            )
-            + Style.RESET_ALL
-        )
-        print(
-            "\nℹ️ "
-            + Fore.CYAN
-            + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
-                d_pred_real.mean(), d_pred_fake.mean()
-            )
-            + Style.RESET_ALL
-        )
+        print("\n✅ " + Fore.MAGENTA +
+              "Epoch: [{}/{}], Batch Num: [{}/{}]".format(
+                  (epoch + 1), num_epochs, n_batch, num_batches) +
+              Style.RESET_ALL)
+        print("\nℹ️ " + Fore.CYAN +
+              "Discriminator Loss: {:.4f}, Generator Loss: {:.4f}".format(
+                  d_error, g_error) + Style.RESET_ALL)
+
+        print("\nℹ️ " + Fore.CYAN + "D(x): {:.4f}, D(G(z)): {:.4f}".format(
+            d_pred_real.mean(), d_pred_fake.mean()) + Style.RESET_ALL)
 
     def save_models(self, generator, discriminator, epoch):
-        out_dir = "./results/models/{}".format(self.data_subdir)
+
+        if int(os.environ.get('COLAB')) == 1:
+
+            out_dir = os.path.join(os.environ.get('HOME'), 'results',
+                                   'miniGan', 'checkpoints', self.data_subdir)
+
+        out_dir = os.path.join(os.environ.get('HOME'), 'results', 'miniGan',
+                               'checkpoints', self.data_subdir)
 
         Manager.make_directory(out_dir)
 
@@ -207,31 +231,27 @@ class Manager:  # make manager work with and with out epochs
             "{}/checkpointCritic-{}".format(out_dir, (epoch + 1)),
         )
 
-        print(
-            "\n🔽 "
-            + Fore.YELLOW
-            + "Saved model for epoch {}".format((epoch + 1))
-            + Style.RESET_ALL
-        )
+        print("\n🔽 " + Fore.YELLOW +
+              "Saved model for epoch {}".format((epoch + 1)) + Style.RESET_ALL)
 
     def load_models(self, *args, last=True):
         parent = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..")
         input_dir = f"{parent}/results/models/{self.data_subdir}/{args[0]}"
-        generator = torch.load(input_dir, map_location=lambda storage, loc: storage)
+        generator = torch.load(input_dir,
+                               map_location=lambda storage, loc: storage)
 
-        print(
-            "\n🔼 "
-            + Fore.YELLOW
-            + "Loaded model from {}...".format(input_dir[:59])
-            + Style.RESET_ALL
-        )
+        print("\n🔼 " + Fore.YELLOW +
+              "Loaded model from {}...".format(input_dir[:59]) +
+              Style.RESET_ALL)
 
         return generator
 
     def close(self, generator, discriminator, out_dir, epoch):
         self.writer.close()
-        torch.save(generator.state_dict(), "{}/G_epoch_{}".format(out_dir, epoch))
-        torch.save(discriminator.state_dict(), "{}/D_epoch_{}".format(out_dir, epoch))
+        torch.save(generator.state_dict(),
+                   "{}/G_epoch_{}".format(out_dir, epoch))
+        torch.save(discriminator.state_dict(),
+                   "{}/D_epoch_{}".format(out_dir, epoch))
 
     # Private Functionality
 
@@ -249,12 +269,9 @@ class Manager:  # make manager work with and with out epochs
         try:
             os.makedirs(directory)
 
-            print(
-                "\n⏹ "
-                + Fore.GREEN
-                + f"This directory has been created {directory}"
-                + Style.RESET_ALL
-            )
+            print("\n⏹ " + Fore.GREEN +
+                  f'This directory has been created {directory}' +
+                  Style.RESET_ALL)
 
         except OSError as e:
             if e.errno != errno.EEXIST:
