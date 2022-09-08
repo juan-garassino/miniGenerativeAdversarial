@@ -272,7 +272,7 @@ class Manager:  # make manager work with and with out epochs
                 os.environ.get("HOME"),
                 "..",
                 "content",
-                "Results",
+                "results",
                 "miniGan",
                 "checkpoints",
                 self.data_subdir,
