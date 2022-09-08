@@ -8,6 +8,7 @@ import torchvision.utils as vutils
 
 from datetime import datetime
 from colorama import Style, Fore
+import os
 
 
 def predict(status="generator-25", num_images=16, last=True, plot=False):
@@ -42,7 +43,20 @@ def predict(status="generator-25", num_images=16, last=True, plot=False):
 
         plt.imshow(np.moveaxis(grid.numpy(), 0, -1))
 
-        out_dir = "./results/generated"
+        out_dir = os.path.join(
+            os.environ.get("HOME"), "Results", "miniGan", "predictions"
+        )
+
+        if int(os.environ.get("COLAB")) == 1:
+
+            out_dir = os.path.join(
+                os.environ.get("HOME"),
+                "..",
+                "content",
+                "Results",
+                "miniGan",
+                "predictions",
+            )
 
         Manager.make_directory(out_dir)
 
