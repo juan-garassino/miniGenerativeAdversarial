@@ -79,7 +79,7 @@ class Manager:  # make manager work with and with out epochs
             print(
                 "\n🔽 "
                 + Fore.BLUE
-                + f"Generated picture {picture_name} @ {out_dir}"
+                + f"Generated picture {picture_name.split('/')[-1]} @ {out_dir}"
                 + Style.RESET_ALL
             )
 
