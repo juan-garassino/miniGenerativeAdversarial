@@ -2,10 +2,8 @@ import torch.nn as nn
 import torch
 
 
-class DiscriminatorNet(torch.nn.Module):
-    """
-    A three hidden-layer discriminative neural network
-    """
+class DiscriminatorNet(torch.nn.Module): #
+    '''Imperative implementation of a Discriminator model'''
 
     def __init__(self):
         super(DiscriminatorNet, self).__init__()
@@ -32,9 +30,7 @@ class DiscriminatorNet(torch.nn.Module):
 
 
 class GeneratorNet(torch.nn.Module):
-    """
-    A three hidden-layer generative neural network
-    """
+    '''Imperative implementation of a Generator model'''
 
     def __init__(self):
         super(GeneratorNet, self).__init__()
