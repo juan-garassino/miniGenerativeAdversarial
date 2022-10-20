@@ -10,8 +10,6 @@ import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 
 
-
-
 def predict(status="generator-25", num_images=16, last=True, plot=False):
 
     manager = Manager(model_name="vgan", data_name="mnist")
