@@ -1,32 +1,51 @@
-from instabot import Bot
-import os
+import requests
+import json
 
 
-class instagramAgent:
-    def __init__(self, bot):
-        self.bot = bot  # Create a variable bot.
+def getCreds():
+    """ Get creds required for use in the applications
 
-    def login_instagram(self):
-        self.bot.login(
-            username=os.environ.get("INSTAGRAM_USER"),
-            password=os.environ.get("INSTAGRAM_PASSWORD"),
-        )
+	Returns:
+		dictonary: credentials needed globally
+	"""
 
-    def post_instagram(self, picture="", caption=""):
-        self.bot.upload_photo(picture, caption=caption)
+    creds = dict()  # dictionary to hold everything
+    creds[
+        'access_token'] = 'ACCESS-TOKEN'  # access token for use with all api calls
+    creds[
+        'graph_domain'] = 'https://graph.facebook.com/'  # base domain for api calls
+    creds['graph_version'] = 'v6.0'  # version of the api we are hitting
+    creds['endpoint_base'] = creds['graph_domain'] + creds[
+        'graph_version'] + '/'  # base endpoint with domain and version
+    creds[
+        'instagram_account_id'] = 'INSTAGRAM-BUSINESS-ACCOUNT-ID'  # users instagram account id
 
-    def like_tags(self, tags=["python", "bot", "coding"]):
-        for i in tags:
-            self.bot.like_hashtag(i, amount=10)
+    return creds
 
 
-if __name__ == "__main__":
+def makeApiCall(url, endpointParams, type):
+    """ Request data from endpoint with params
 
-    instagram_agent = instagramAgent(Bot())
+	Args:
+		url: string of the url endpoint to make request from
+		endpointParams: dictionary keyed by the names of the url parameters
+	Returns:
+		object: data from the endpoint
+	"""
 
-    instagram_agent.login_instagram()
+    if type == 'POST':  # post request
+        data = requests.post(url, endpointParams)
+    else:  # get request
+        data = requests.get(url, endpointParams)
 
-    instagram_agent.post_instagram(
-        picture="/home/juan-garassino/code/juan-garassino/miniSeries/miniGan/workflow/download.jpg",
-        caption="first bot post",
-    )
+    response = dict()  # hold response info
+    response['url'] = url  # url we are hitting
+    response['endpoint_params'] = endpointParams  #parameters for the endpoint
+    response['endpoint_params_pretty'] = json.dumps(
+        endpointParams, indent=4)  # pretty print for cli
+    response['json_data'] = json.loads(
+        data.content)  # response data from the api
+    response['json_data_pretty'] = json.dumps(response['json_data'],
+                                              indent=4)  # pretty print for cli
+
+    return response  # get and return content
