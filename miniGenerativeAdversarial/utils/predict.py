@@ -1,6 +1,6 @@
-from miniGan.utils.utils import vectors_to_images, noise
-from miniGan.models.model import GeneratorNet
-from miniGan.managers.manager import Manager
+from miniGenerativeAdversarial.utils.utils import vectors_to_images, noise
+from miniGenerativeAdversarial.models.model import GeneratorNet
+from miniGenerativeAdversarial.managers.manager import Manager
 
 from datetime import datetime
 from colorama import Style, Fore

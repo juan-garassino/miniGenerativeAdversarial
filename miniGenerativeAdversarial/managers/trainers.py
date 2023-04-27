@@ -1,4 +1,4 @@
-from miniGan.utils.utils import ones_target, zeros_target
+from miniGenerativeAdversarial.utils.utils import ones_target, zeros_target
 
 
 def train_discriminator(discriminator, loss, optimizer, real_data, fake_data):

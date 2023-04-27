@@ -1,13 +1,13 @@
-from miniGan.managers.manager import Manager
-from miniGan.managers.trainers import train_discriminator, train_generator
+from miniGenerativeAdversarial.managers.manager import Manager
+from miniGenerativeAdversarial.managers.trainers import train_discriminator, train_generator
 
-from miniGan.utils.utils import noise, images_to_vectors, vectors_to_images
+from miniGenerativeAdversarial.utils.utils import noise, images_to_vectors, vectors_to_images
 
-from miniGan.models.model import GeneratorNet, DiscriminatorNet
-from miniGan.models.optimizers import discriminator_optimizer, generator_optimizer
-from miniGan.models.losses import loss
+from miniGenerativeAdversarial.models.model import GeneratorNet, DiscriminatorNet
+from miniGenerativeAdversarial.models.optimizers import discriminator_optimizer, generator_optimizer
+from miniGenerativeAdversarial.models.losses import loss
 
-from miniGan.sources.data import mnist_data
+from miniGenerativeAdversarial.sources.data import mnist_data
 
 import time
 import os
